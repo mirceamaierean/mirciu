@@ -16,8 +16,8 @@ export const ThemeSwitcher = () => {
   }
 
   return (
-    <div
-      className="text-black dark:text-white p-3 w-fit border-2 rounded-full border-black dark:border-white"
+    <button
+      className="fixed bottom-5 right-5 text-black dark:text-white p-3 w-fit border-2 rounded-full border-black dark:border-white"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
       <div>
@@ -58,6 +58,6 @@ export const ThemeSwitcher = () => {
           />
         </motion.svg>
       </div>
-    </div>
+    </button>
   );
 };

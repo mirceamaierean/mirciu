@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 
 interface CircleProps {
   rotationAngle?: number;
-  width?: string;
   translateX?: number;
   translateY?: number;
 }
@@ -16,7 +15,7 @@ const Circle = (props: CircleProps) => {
     <motion.svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 100 100"
-      className={`w-${props.width} text-black dark:text-white`}
+      className={`w-16 text-black dark:text-white`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -61,7 +60,6 @@ const Circle = (props: CircleProps) => {
 
 Circle.defaultProps = {
   rotationAngle: 0,
-  width: "16",
   translateX: 0,
   translateY: 0,
 };
