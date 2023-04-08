@@ -38,7 +38,7 @@ const Spotify = async () => {
     const { access_token } = await getAccessToken();
 
     const response = await fetch(
-      "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=1",
+      "https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=1",
       {
         headers: {
           Authorization: `Bearer ${access_token}`,
@@ -47,13 +47,11 @@ const Spotify = async () => {
     );
 
     const { items } = await response.json();
+    console.log(items);
     const track = items[0];
 
-    const Filter = require("bad-words"),
-      filter = new Filter();
-
     const trackData: Track = {
-      name: filter.clean(track.name),
+      name: track.name,
       artist: track.artists
         .map((_artist: { name: string }) => _artist.name)
         .join(", "),
@@ -78,33 +76,40 @@ const Spotify = async () => {
     return "";
   };
 
+  const getTextContrast = (hexColor: string) => {
+    const r = parseInt(hexColor.slice(1, 3), 16);
+    const g = parseInt(hexColor.slice(3, 5), 16);
+    const b = parseInt(hexColor.slice(5, 7), 16);
+    const yiq = (r * 299 + g * 587 + b * 114) / 1000;
+    return yiq >= 128 ? "black" : "white";
+  };
+
   return (
     <div>
-      {await topTracks().then((track) => {
-        return getDominantColor(track.albumImageUrl).then((color) => {
-          return (
-            <div
-              style={{ backgroundColor: color }}
-              className="mt-10 flex flex-col md:flex-row rounded-xl"
-            >
-              <Image
-                src={track.albumImageUrl}
-                alt={track.name}
-                width={300}
-                height={300}
-                className="p-2 md:p-10"
-              />
-              <div className="m-auto">
-                <h2 className="text-white text-4xl font-bold">{track.name}</h2>
-                <h3 className="text-white">{track.artist}</h3>
-                <h4 className="text-white">{track.album}</h4>
-                <Link target="_blank" href={track.songUrl as string} passHref>
-                  <h1 className="text-white">Listen on Spotify</h1>
-                </Link>
-              </div>
+      {await topTracks().then(async (track) => {
+        const color = await getDominantColor(track.albumImageUrl);
+        const contrast = getTextContrast(color as string);
+        return (
+          <div
+            style={{ backgroundColor: color }}
+            className="mt-10 flex flex-col md:flex-row rounded-xl"
+          >
+            <Image
+              src={track.albumImageUrl}
+              alt={track.name}
+              width={300}
+              height={300}
+              className="p-2 md:p-10" />
+            <div className="m-auto">
+              <h2 className={`text-${contrast} font-semibold text-3xl`}>{track.name}</h2>
+              <h3 className={`text-${contrast}`}>Artist: {track.artist}</h3>
+              <h4 className={`text-${contrast}`}>Album: {track.album}</h4>
+              <Link target="_blank" href={track.songUrl as string} passHref>
+                <h1 className={`text-${contrast}`}>Listen on Spotify</h1>
+              </Link>
             </div>
-          );
-        });
+          </div>
+        );
       })}
     </div>
   );
