@@ -44,7 +44,7 @@ const Spotify = async () => {
     const { access_token } = await getAccessToken();
 
     const response = await fetch(
-      "https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=1",
+      "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=1",
       {
         headers: {
           Authorization: `Bearer ${access_token}`,
@@ -94,6 +94,7 @@ const Spotify = async () => {
       {await topTracks().then(async (track) => {
         const color = await getDominantColor(track.albumImageUrl);
         const contrast = getTextContrast(color as string);
+        console.log(contrast);
         return (
           <div
             style={{ backgroundColor: color }}
@@ -109,15 +110,15 @@ const Spotify = async () => {
             <div className="flex flex-col justify-evenly mx-auto px-4">
               <div>
                 <h2
-                  className={`text-${contrast} font-semibold sm:text-2xl py-2 sm:py-4`}
+                  className={`text-${contrast} dark:text-${contrast} font-semibold sm:text-2xl py-2 sm:py-4`}
                 >
                   {track.name}
                 </h2>
-                <h3 className={`text-${contrast}`}>Artist: {track.artist}</h3>
-                <h4 className={`text-${contrast}`}>Album: {track.album}</h4>
+                <h3 className={`text-${contrast} dark:text-${contrast}`}>Artist: {track.artist}</h3>
+                <h4 className={`text-${contrast} dark:text-${contrast}`}>Album: {track.album}</h4>
               </div>
               <div
-                className={`flex justify-center mx-auto w-full rounded-full border-2 border-${contrast} hover:shadow-2xl mt-4 p-2 ease-in-out duration-300 hover:scale-105`}
+                className={`flex justify-center mx-auto w-full rounded-full border-2 border-${contrast} dark:border-${contrast} hover:shadow-2xl mt-4 p-2 ease-in-out duration-300 hover:scale-105`}
               >
                 <Link
                   className="flex flex-row items-center"
@@ -125,8 +126,8 @@ const Spotify = async () => {
                   href={track.songUrl as string}
                   passHref
                 >
-                  <h1 className={`text-${contrast} mr-2 text-xl`}>Play on</h1>
-                  <SpotifyIcon className={`h-6 fill-${contrast}`} />
+                  <h2 className={`text-${contrast} dark:text-${contrast}  mr-2 text-xl`}>Play on</h2>
+                  <SpotifyIcon className={`h-6 !fill-${contrast}`} />
                 </Link>
               </div>
             </div>
