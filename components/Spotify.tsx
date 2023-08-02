@@ -94,7 +94,6 @@ const Spotify = async () => {
       {await topTracks().then(async (track) => {
         const color = await getDominantColor(track.albumImageUrl);
         const contrast = getTextContrast(color as string);
-        console.log(contrast);
         return (
           <div
             style={{ backgroundColor: color }}

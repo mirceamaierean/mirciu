@@ -14,6 +14,8 @@ const Info = () => {
             "Tech Enthusiast",
             "CS Student",
             "Formula 1 Fanatic",
+            "Speedcuber",
+            "Writer (sort of)",
             "Music Lover",
             "Meme Connoisseur",
             "Simple Human Being",
