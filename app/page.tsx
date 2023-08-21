@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
       <Link href="/about">
-        <p className="text-white font-matter font-thin">About</p>
+        <p className="dark:text-white font-matter font-extrabold">About</p>
       </Link>
       <Spotify />
     </>
