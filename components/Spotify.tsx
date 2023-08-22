@@ -10,8 +10,7 @@ interface Track {
 
 const Spotify = async () => {
   const getAccessToken = async () => {
-    const refresh_token = process.env
-      .NEXT_PUBLIC_SPOTIFY_REFRESH_TOKEN as string;
+    const refresh_token = process.env.NEXT_PUBLIC_SPOTIFY_REFRESH_TOKEN as string;
 
     const newLocal = "refresh_token";
     const response = await fetch("https://accounts.spotify.com/api/token", {
@@ -44,10 +43,12 @@ const Spotify = async () => {
     );
 
     const { items } = await response.json();
-    const track = items[0];
+    const track = items[10];
+
+    var Filter = require("bad-words"), filter = new Filter();
 
     const trackData: Track = {
-      name: track.name,
+      name: filter.clean(track.name),
       artist: track.artists
         .map((_artist: { name: string }) => _artist.name)
         .join(", "),
