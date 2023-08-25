@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Vibrant from "node-vibrant";
 
 interface Track {
   name: string;
@@ -10,8 +11,7 @@ interface Track {
 
 const Spotify = async () => {
   const getAccessToken = async () => {
-    const refresh_token = process.env
-      .NEXT_PUBLIC_SPOTIFY_REFRESH_TOKEN as string;
+    const refresh_token = process.env.NEXT_PUBLIC_SPOTIFY_REFRESH_TOKEN as string;
 
     const newLocal = "refresh_token";
     const response = await fetch("https://accounts.spotify.com/api/token", {
@@ -35,7 +35,7 @@ const Spotify = async () => {
     const { access_token } = await getAccessToken();
 
     const response = await fetch(
-      "https://api.spotify.com/v1/me/top/tracks?time_range=short_term",
+      "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=1",
       {
         headers: {
           Authorization: `Bearer ${access_token}`,
@@ -46,8 +46,9 @@ const Spotify = async () => {
     const { items } = await response.json();
     const track = items[0];
 
+    var Filter = require("bad-words"), filter = new Filter();
     const trackData: Track = {
-      name: track.name,
+      name: filter.clean(track.name),
       artist: track.artists
         .map((_artist: { name: string }) => _artist.name)
         .join(", "),
@@ -58,23 +59,46 @@ const Spotify = async () => {
     return trackData;
   };
 
+  const getDominantColor = async (imageUrl: string) => {
+    const palette = await Vibrant.from(imageUrl).getPalette();
+    const color = palette.Vibrant;
+    if (color) {
+      const hex = color.getHex();
+      console.log(hex);
+      return hex;
+    }
+    return "";
+  };
+
   return (
     <div>
       {await topTracks().then((track) => {
         return (
-          <div>
-            <Image
-              src={track.albumImageUrl}
-              alt={track.name}
-              width={300}
-              height={300}
-            />
-            <h2 className="text-white font-matter">{track.name}</h2>
-            <h3 className="text-white font-matter">{track.artist}</h3>
-            <h4 className="text-white font-matter">{track.album}</h4>
-          </div>
-        );
-      })}
+          getDominantColor(track.albumImageUrl).then((color) => {
+            return (
+              <div
+                style={{
+                  backgroundColor: color,
+                  width: "100%",
+                  height: "100%",
+                }}
+              >
+                <Image
+                  src={track.albumImageUrl}
+                  alt={track.name}
+                  width={200}
+                  height={200}
+                />
+                <h2 className="text-white font-matter">{track.name}</h2>
+                <h3 className="text-white font-matter">{track.artist}</h3>
+                <h4 className="text-white font-matter">{track.album}</h4>
+              </div>
+
+            );
+          }
+          ))
+      }
+      )}
     </div>
   );
 };
