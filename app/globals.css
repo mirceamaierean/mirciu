@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Matter';
-  src: url('../assets/Matter/Matter-Regular.ttf');
+  font-family: "Matter";
+  src: url("../assets/Matter/Matter-Regular.ttf");
   font-weight: 400;
 }
 

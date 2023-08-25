@@ -1,3 +1,3 @@
 import Sidebar from "./Sidebar";
-
-export { Sidebar };
+import Spotify from "./Spotify";
+export { Sidebar, Spotify };
