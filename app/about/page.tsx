@@ -5,7 +5,7 @@ export default function About() {
   return (
     <>
       <Link href="/">
-        <p className="text-white">Back Home</p>
+        <p className="text-white font-matter">Back Home</p>
       </Link>
     </>
   );
