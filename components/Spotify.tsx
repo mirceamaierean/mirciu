@@ -44,7 +44,7 @@ const Spotify = async () => {
     const { access_token } = await getAccessToken();
 
     const response = await fetch(
-      "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=1",
+      "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=25",
       {
         headers: {
           Authorization: `Bearer ${access_token}`,
@@ -53,7 +53,7 @@ const Spotify = async () => {
     );
 
     const { items } = await response.json();
-    const track = items[0];
+    const track = items[21];
 
     const trackData: Track = {
       name: track.name,
@@ -114,8 +114,12 @@ const Spotify = async () => {
                 >
                   {track.name}
                 </h2>
-                <h3 className={`text-${contrast} dark:text-${contrast}`}>Artist: {track.artist}</h3>
-                <h4 className={`text-${contrast} dark:text-${contrast}`}>Album: {track.album}</h4>
+                <h3 className={`text-${contrast} dark:text-${contrast}`}>
+                  Artist: {track.artist}
+                </h3>
+                <h4 className={`text-${contrast} dark:text-${contrast}`}>
+                  Album: {track.album}
+                </h4>
               </div>
               <div
                 className={`flex justify-center mx-auto w-full rounded-full border-2 border-${contrast} dark:border-${contrast} hover:shadow-2xl mt-4 p-2 ease-in-out duration-300 hover:scale-105`}
@@ -126,7 +130,11 @@ const Spotify = async () => {
                   href={track.songUrl as string}
                   passHref
                 >
-                  <h2 className={`text-${contrast} dark:text-${contrast}  mr-2 text-xl`}>Play on</h2>
+                  <h2
+                    className={`text-${contrast} dark:text-${contrast}  mr-2 text-xl`}
+                  >
+                    Play on
+                  </h2>
                   <SpotifyIcon className={`h-6 !fill-${contrast}`} />
                 </Link>
               </div>
