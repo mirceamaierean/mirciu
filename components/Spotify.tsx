@@ -44,7 +44,7 @@ const Spotify = async () => {
     const { access_token } = await getAccessToken();
 
     const response = await fetch(
-      "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=25",
+      "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=1",
       {
         headers: {
           Authorization: `Bearer ${access_token}`,
@@ -53,7 +53,7 @@ const Spotify = async () => {
     );
 
     const { items } = await response.json();
-    const track = items[21];
+    const track = items[0];
 
     const trackData: Track = {
       name: track.name,
@@ -120,7 +120,7 @@ const Spotify = async () => {
                   Album: {track.album}
                 </h4>
               </div>
-              <div
+              <button
                 className={`flex justify-center mx-auto w-full rounded-full border-2 border-${contrast} dark:border-${contrast} hover:shadow-2xl mt-4 p-2 ease-in-out duration-300 hover:scale-105`}
               >
                 <Link
@@ -134,9 +134,9 @@ const Spotify = async () => {
                   >
                     Play on
                   </h2>
-                  <SpotifyIcon className={`h-6 !fill-${contrast}`} />
+                  <SpotifyIcon className={`h-6 ${contrast === "black" ? "fill-black" : "fill-white"}`} />
                 </Link>
-              </div>
+              </button>
             </div>
           </div>
         );
