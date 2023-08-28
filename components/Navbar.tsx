@@ -1,11 +1,9 @@
 import React from "react";
 import Link from "next/link";
-import { ThemeProvider } from "@/app/theme-provider";
-import { ThemeSwitcher } from "./ThemeSwitcher";
 
 const Navbar = () => {
   return (
-    <nav className="px-20 py-9 lg:py-12 w-full flex flex-row justify-between ">
+    <nav className="px-20 py-9 lg:py-12 w-full flex flex-row justify-between">
       <div>
         <Link href="/">
           <h1 className="block group dark:text-white underlined whitespace-nowrap font-semibold text-3xl">
@@ -36,11 +34,6 @@ const Navbar = () => {
             <span className="block max-w-0 group-hover:max-w-full transition-all duration-300 h-0.5 bg-black dark:bg-white"></span>
           </h1>
         </Link>
-      </div>
-      <div>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <ThemeSwitcher />
-        </ThemeProvider>
       </div>
     </nav>
   );

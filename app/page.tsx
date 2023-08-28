@@ -1,8 +1,6 @@
-import { Spotify } from "@/components";
 import { Info } from "@/components";
 import Image from "next/image";
 import mirciu from "@/public/images/mirciu.png";
-import Typewriter from "typewriter-effect";
 
 export default function Home() {
   return (
