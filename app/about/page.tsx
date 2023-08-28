@@ -1,12 +1,11 @@
 import Link from "next/link";
 import React from "react";
+import { Circle } from "@/components";
 
 export default function About() {
   return (
     <>
-      <Link href="/">
-        <p className="text-white font-matter">Back Home</p>
-      </Link>
+      <Circle translateY={10} />
     </>
   );
 }
