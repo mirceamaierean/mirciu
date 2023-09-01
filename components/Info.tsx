@@ -4,7 +4,7 @@ import Typewriter from "typewriter-effect";
 
 const Info = () => {
   return (
-    <div className="text-4xl font-semibold flex flex-row">
+    <div className="text-2xl md:text-4xl font-semibold flex flex-row">
       <h2> I am a </h2>
       &nbsp;
       <Typewriter
