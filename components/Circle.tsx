@@ -13,8 +13,9 @@ const Circle = (props: CircleProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div className="flex flex-row mt-24"
-        onMouseEnter={() => setIsHovered(true)}
+    <div
+      className="flex flex-row mt-24"
+      onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <motion.svg
@@ -61,14 +62,8 @@ const Circle = (props: CircleProps) => {
       {props.textContent && (
         <h1 className="text-2xl my-auto pl-2">{props.textContent}</h1>
       )}
-      </div>
+    </div>
   );
-};
-
-Circle.defaultProps = {
-  rotationAngle: 0,
-  translateX: 0,
-  translateY: 0,
 };
 
 export default Circle;
