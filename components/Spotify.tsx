@@ -44,7 +44,7 @@ const Spotify = async () => {
     const { access_token } = await getAccessToken();
 
     const response = await fetch(
-      "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=1",
+      "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=50",
       {
         headers: {
           Authorization: `Bearer ${access_token}`,
@@ -97,44 +97,52 @@ const Spotify = async () => {
         return (
           <div
             style={{ backgroundColor: color }}
-            className="py-5 sm:py-2 flex flex-col md:flex-row rounded-xl justify-center max-w-4xl mx-auto"
+            className="py-5 flex flex-col rounded-xl justify-center w-[19rem] mx-auto"
           >
             <Image
               src={track.albumImageUrl}
               alt={track.name}
               width={300}
               height={300}
-              className="p-4 md:p-10 mx-auto sm:m-0"
+              className="pt-2 px-4 mx-auto"
             />
-            <div className="flex flex-col justify-evenly mx-auto px-4">
-              <div>
-                <h2
-                  className={`text-${contrast} dark:text-${contrast} font-semibold sm:text-2xl py-2 sm:py-4`}
+            <div className="flex flex-col justify-evenly items-center px-4">
+              <div className="flex flex-col justify-center items-center">
+                <h3
+                  className={`text-${contrast} dark:text-${contrast} font-bold text-lg py-3`}
                 >
                   {track.name}
-                </h2>
-                <h3 className={`text-${contrast} dark:text-${contrast}`}>
+                </h3>
+                <h3
+                  className={`text-${contrast} dark:text-${contrast} font-semibold text-sm`}
+                >
                   Artist: {track.artist}
                 </h3>
-                <h4 className={`text-${contrast} dark:text-${contrast}`}>
+                <h3
+                  className={`text-${contrast} dark:text-${contrast} font-semibold text-sm`}
+                >
                   Album: {track.album}
-                </h4>
+                </h3>
               </div>
               <button
-                className={`flex justify-center mx-auto w-full rounded-full border-2 border-${contrast} dark:border-${contrast} hover:shadow-2xl mt-4 p-2 ease-in-out duration-300 hover:scale-105`}
+                className={`px-10 py-2 mt-2 duration-300 hover:scale-110`}
               >
                 <Link
-                  className="flex flex-row items-center"
+                  className="flex flex-row ml-1"
                   target="_blank"
                   href={track.songUrl as string}
                   passHref
                 >
                   <h2
-                    className={`text-${contrast} dark:text-${contrast}  mr-2 text-xl`}
+                    className={`text-${contrast} dark:text-${contrast} mr-1 text-sm`}
                   >
                     Play on
                   </h2>
-                  <SpotifyIcon className={`h-6 ${contrast === "black" ? "fill-black" : "fill-white"}`} />
+                  <SpotifyIcon
+                    className={`h-5 ${
+                      contrast === "black" ? "fill-black" : "fill-white"
+                    }`}
+                  />
                 </Link>
               </button>
             </div>
