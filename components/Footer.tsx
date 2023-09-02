@@ -3,7 +3,7 @@ import React from "react";
 import { ThemeProvider } from "next-themes";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 
-const Footer = () => {
+export const Footer = () => {
   return (
     <div>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
@@ -12,5 +12,3 @@ const Footer = () => {
     </div>
   );
 };
-
-export default Footer;
