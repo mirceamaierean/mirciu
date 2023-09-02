@@ -9,7 +9,7 @@ interface CircleProps {
   textContent?: string;
 }
 
-const Circle = (props: CircleProps) => {
+export const Circle = (props: CircleProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -65,5 +65,3 @@ const Circle = (props: CircleProps) => {
     </div>
   );
 };
-
-export default Circle;

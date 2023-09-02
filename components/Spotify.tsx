@@ -17,7 +17,7 @@ const SpotifyIcon = (props: SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-const Spotify = async () => {
+export const Spotify = async () => {
   const getAccessToken = async () => {
     const refresh_token = process.env
       .NEXT_PUBLIC_SPOTIFY_REFRESH_TOKEN as string;
@@ -70,11 +70,8 @@ const Spotify = async () => {
 
   const getDominantColor = async (imageUrl: string) => {
     const palette = await Vibrant.from(imageUrl).getPalette();
-    // extrat all hex code form palette
     const colors = Object.values(palette).map((color) => color?.hex);
-    // remove undefined values
     const filteredColors = colors.filter((color) => color !== undefined);
-    // return a random color
     if (filteredColors.length > 0) {
       return filteredColors[Math.floor(Math.random() * filteredColors.length)];
     }
@@ -125,7 +122,7 @@ const Spotify = async () => {
                 </h3>
               </div>
               <button
-                className={`px-10 py-2 mt-2 duration-300 hover:scale-110`}
+                className={`px-10 py-2 mt-2 duration-300 xl:hover:scale-110`}
               >
                 <Link
                   className="flex flex-row ml-1"
@@ -152,5 +149,3 @@ const Spotify = async () => {
     </div>
   );
 };
-
-export default Spotify;
