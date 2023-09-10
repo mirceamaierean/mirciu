@@ -5,10 +5,10 @@ import { ThemeSwitcher } from "./ThemeSwitcher";
 
 export const Footer = () => {
   return (
-    <div>
+    <>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
         <ThemeSwitcher />
       </ThemeProvider>
-    </div>
+    </>
   );
 };

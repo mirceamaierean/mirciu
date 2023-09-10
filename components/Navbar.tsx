@@ -8,7 +8,7 @@ export const Navbar = () => {
 
   return (
     <nav
-      className={`bg-white dark:bg-[#1f2028] fixed top-0 left-0 px-6 sm:px-20 py-6 w-full flex flex-col md:flex-row justify-between `}
+      className={`bg-white dark:bg-[#1f2028] fixed top-0 left-0 sm:static px-6 sm:px-20 py-6 sm:pt-16 w-full flex flex-col md:flex-row justify-between z-50`}
     >
       <div className="flex flex-row justify-between items-center">
         <Link href="/">
@@ -18,7 +18,7 @@ export const Navbar = () => {
           </h1>
         </Link>
         <button
-          className="block md:hidden border-2 p-3 rounded-full"
+          className="block md:hidden border-2 p-3 rounded-xl scale-75"
           onClick={() => toggleOpen(!isOpen)}
         >
           <motion.nav animate={isOpen ? "open" : "closed"}>

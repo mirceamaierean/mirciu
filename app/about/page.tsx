@@ -1,10 +1,9 @@
 import React from "react";
-import { Spotify } from "@/components/Spotify";
 
 export default function About() {
   return (
-    <>
-      <Spotify />
-    </>
+    <div className="mt-40">
+
+    </div>
   );
 }
