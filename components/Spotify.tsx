@@ -70,12 +70,7 @@ export const Spotify = async () => {
 
   const getDominantColor = async (imageUrl: string) => {
     const palette = await Vibrant.from(imageUrl).getPalette();
-    console.log(palette);
-    const colors = Object.values(palette).map((color) => color?.hex);
-    const filteredColors = colors.filter((color) => color !== undefined);
-    if (filteredColors.length > 0)
-      return [filteredColors[4], filteredColors[1]];
-    return ["", ""];
+    return [palette.DarkMuted?.hex, palette.DarkVibrant?.hex];
   };
 
   const getTextContrast = (hexColor: string) => {
@@ -89,11 +84,15 @@ export const Spotify = async () => {
   return (
     <>
       {await topTracks().then(async (track) => {
-        const [colorStart, colorEnd] = await getDominantColor(track.albumImageUrl) as string[];
+        const [colorStart, colorEnd] = (await getDominantColor(
+          track.albumImageUrl,
+        )) as string[];
         const contrast = getTextContrast(colorEnd as string);
         return (
           <div
-            style={{ 'backgroundImage': `linear-gradient(to bottom, ${colorStart} 30%, ${colorEnd})` }}
+            style={{
+              backgroundImage: `linear-gradient(to bottom, ${colorStart} 30%, ${colorEnd})`,
+            }}
             className={`bg-gradient-to-br py-3 flex flex-col rounded-xl justify-center w-72 h-[500px] mx-auto`}
           >
             <Image
@@ -106,12 +105,16 @@ export const Spotify = async () => {
               className="mx-auto py-2"
             />
             <div className="flex flex-col justify-evenly items-center px-6">
-              <div className="flex flex-col justify-center items-center" style={{ 'color': `${contrast}` }}>
-                <h3
-                  className={`text-md text-left`}
-                >
-                  I love listening to music. Based on Spotify{"'"}s data, I{"'"}ve probably listened recently too much to
-                  <strong> {track.name} </strong> by <strong> {track.artist} </strong> from the album <strong>{track.album}</strong> 
+              <div
+                className="flex flex-col justify-center items-center"
+                style={{ color: `${contrast}` }}
+              >
+                <h3 className={`text-md text-left`}>
+                  I love listening to music. Based on Spotify{"'"}s data, I{"'"}
+                  ve probably listened recently too much to
+                  <strong> {track.name} </strong> by{" "}
+                  <strong> {track.artist} </strong> from the album{" "}
+                  <strong>{track.album}</strong>
                 </h3>
               </div>
               <button
