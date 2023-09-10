@@ -44,7 +44,7 @@ export const Spotify = async () => {
     const { access_token } = await getAccessToken();
 
     const response = await fetch(
-      "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=50",
+      "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=1",
       {
         headers: {
           Authorization: `Bearer ${access_token}`,
@@ -87,23 +87,25 @@ export const Spotify = async () => {
   };
 
   return (
-    <div>
+    <>
       {await topTracks().then(async (track) => {
         const color = await getDominantColor(track.albumImageUrl);
         const contrast = getTextContrast(color as string);
         return (
           <div
             style={{ backgroundColor: color }}
-            className="py-5 flex flex-col rounded-xl justify-center w-[19rem] mx-auto"
+            className="py-3 flex flex-col rounded-xl justify-center w-60 h-96 mx-auto"
           >
             <Image
               src={track.albumImageUrl}
               alt={track.name}
-              width={300}
-              height={300}
-              className="pt-2 px-4 mx-auto"
+              draggable={false}
+              width={200}
+              height={200}
+              priority={true}
+              className="mx-auto pt-2"
             />
-            <div className="flex flex-col justify-evenly items-center px-4">
+            <div className="flex flex-col justify-evenly items-center">
               <div className="flex flex-col justify-center items-center">
                 <h3
                   className={`text-${contrast} dark:text-${contrast} font-bold text-lg py-3`}
@@ -146,6 +148,6 @@ export const Spotify = async () => {
           </div>
         );
       })}
-    </div>
+    </>
   );
 };
