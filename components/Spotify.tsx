@@ -17,131 +17,124 @@ const SpotifyIcon = (props: SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-export const Spotify = async () => {
-  const getAccessToken = async () => {
-    const refresh_token = process.env
-      .NEXT_PUBLIC_SPOTIFY_REFRESH_TOKEN as string;
+const getAccessToken = async () => {
+  const refresh_token = process.env.NEXT_PUBLIC_SPOTIFY_REFRESH_TOKEN as string;
 
-    const newLocal = "refresh_token";
-    const response = await fetch("https://accounts.spotify.com/api/token", {
-      method: "POST",
+  const newLocal = "refresh_token";
+  const response = await fetch("https://accounts.spotify.com/api/token", {
+    method: "POST",
+    headers: {
+      Authorization: `Basic ${Buffer.from(
+        `${process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID}:${process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET}`,
+      ).toString("base64")}`,
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: new URLSearchParams({
+      grant_type: newLocal,
+      refresh_token,
+    }),
+  });
+
+  return response.json();
+};
+
+const getTopTrack = async (): Promise<Track> => {
+  const { access_token } = await getAccessToken();
+
+  const response = await fetch(
+    "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=1",
+    {
       headers: {
-        Authorization: `Basic ${Buffer.from(
-          `${process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID}:${process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET}`,
-        ).toString("base64")}`,
-        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: `Bearer ${access_token}`,
       },
-      body: new URLSearchParams({
-        grant_type: newLocal,
-        refresh_token,
-      }),
-    });
+    },
+  );
 
-    return response.json();
+  const { items } = await response.json();
+  const track = items[0];
+
+  const trackData: Track = {
+    name: track.name,
+    artist: track.artists
+      .map((_artist: { name: string }) => _artist.name)
+      .join(", "),
+    album: track.album.name,
+    albumImageUrl: track.album.images[0].url,
+    songUrl: track.external_urls.spotify,
   };
 
-  const topTracks = async () => {
-    const { access_token } = await getAccessToken();
+  return trackData;
+};
 
-    const response = await fetch(
-      "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=1",
-      {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      },
-    );
+const getTextContrast = (hexColor: string) => {
+  const r = parseInt(hexColor.slice(1, 3), 16);
+  const g = parseInt(hexColor.slice(3, 5), 16);
+  const b = parseInt(hexColor.slice(5, 7), 16);
+  const yiq = (r * 299 + g * 587 + b * 114) / 1000;
+  return yiq >= 128 ? "black" : "white";
+};
 
-    const { items } = await response.json();
-    const track = items[0];
+const getDominantColor = async (imageUrl: string) => {
+  const palette = await Vibrant.from(imageUrl).getPalette();
+  return [palette.DarkMuted?.hex, palette.DarkVibrant?.hex];
+};
 
-    const trackData: Track = {
-      name: track.name,
-      artist: track.artists
-        .map((_artist: { name: string }) => _artist.name)
-        .join(", "),
-      album: track.album.name,
-      albumImageUrl: track.album.images[0].url,
-      songUrl: track.external_urls.spotify,
-    };
-
-    return trackData;
-  };
-
-  const getDominantColor = async (imageUrl: string) => {
-    const palette = await Vibrant.from(imageUrl).getPalette();
-    return [palette.DarkMuted?.hex, palette.DarkVibrant?.hex];
-  };
-
-  const getTextContrast = (hexColor: string) => {
-    const r = parseInt(hexColor.slice(1, 3), 16);
-    const g = parseInt(hexColor.slice(3, 5), 16);
-    const b = parseInt(hexColor.slice(5, 7), 16);
-    const yiq = (r * 299 + g * 587 + b * 114) / 1000;
-    return yiq >= 128 ? "black" : "white";
-  };
+export default async function Spotify() {
+  const topTrack = await getTopTrack();
+  const [colorStart, colorEnd] = (await getDominantColor(
+    topTrack.albumImageUrl,
+  )) as string[];
+  const contrast = getTextContrast(colorEnd as string);
 
   return (
-    <>
-      {await topTracks().then(async (track) => {
-        const [colorStart, colorEnd] = (await getDominantColor(
-          track.albumImageUrl,
-        )) as string[];
-        const contrast = getTextContrast(colorEnd as string);
-        return (
-          <div
-            style={{
-              backgroundImage: `linear-gradient(to bottom, ${colorStart} 30%, ${colorEnd})`,
-            }}
-            className={`bg-gradient-to-br py-3 flex flex-col rounded-xl justify-center w-72 h-[500px] mx-auto`}
+    <div
+      style={{
+        backgroundImage: `linear-gradient(to bottom, ${colorStart} 30%, ${colorEnd})`,
+      }}
+      className={`bg-gradient-to-br py-3 flex flex-row rounded-xl justify-center w-[30rem] mx-auto`}
+    >
+      <Image
+        src={topTrack.albumImageUrl}
+        alt={topTrack.name}
+        draggable={false}
+        width={225}
+        height={225}
+        priority={true}
+        className="mx-auto pl-4"
+      />
+      <div className="flex flex-col justify-evenly items-center px-6">
+        <div
+          className="flex flex-col justify-center items-center"
+          style={{ color: `${contrast}` }}
+        >
+          <h3 className={`text-md text-left`}>
+            I love listening to music. Based on Spotify{"'"}s data, I{"'"}
+            ve (probably) recently listened too much to
+            <strong> {topTrack.name} </strong> by{" "}
+            <strong> {topTrack.artist} </strong> from the album{" "}
+            <strong>{topTrack.album}</strong>
+          </h3>
+        </div>
+        <button className={`py-2 mt-2 duration-300 xl:hover:scale-110`}>
+          <Link
+            className="flex flex-row ml-1"
+            target="_blank"
+            href={topTrack.songUrl as string}
+            passHref
           >
-            <Image
-              src={track.albumImageUrl}
-              alt={track.name}
-              draggable={false}
-              width={250}
-              height={250}
-              priority={true}
-              className="mx-auto py-2"
+            <h2
+              className={`text-${contrast} dark:text-${contrast} mr-1 text-sm`}
+            >
+              Play on
+            </h2>
+            <SpotifyIcon
+              className={`h-5 ${
+                contrast === "black" ? "fill-black" : "fill-white"
+              }`}
             />
-            <div className="flex flex-col justify-evenly items-center px-6">
-              <div
-                className="flex flex-col justify-center items-center"
-                style={{ color: `${contrast}` }}
-              >
-                <h3 className={`text-md text-left`}>
-                  I love listening to music. Based on Spotify{"'"}s data, I{"'"}
-                  ve probably listened recently too much to
-                  <strong> {track.name} </strong> by{" "}
-                  <strong> {track.artist} </strong> from the album{" "}
-                  <strong>{track.album}</strong>
-                </h3>
-              </div>
-              <button
-                className={`px-10 py-2 mt-2 duration-300 xl:hover:scale-110`}
-              >
-                <Link
-                  className="flex flex-row ml-1"
-                  target="_blank"
-                  href={track.songUrl as string}
-                  passHref
-                >
-                  <h2
-                    className={`text-${contrast} dark:text-${contrast} mr-1 text-sm`}
-                  >
-                    Play on
-                  </h2>
-                  <SpotifyIcon
-                    className={`h-5 ${
-                      contrast === "black" ? "fill-black" : "fill-white"
-                    }`}
-                  />
-                </Link>
-              </button>
-            </div>
-          </div>
-        );
-      })}
-    </>
+          </Link>
+        </button>
+      </div>
+    </div>
   );
-};
+}
