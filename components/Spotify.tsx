@@ -20,8 +20,11 @@ const SpotifyIcon = (props: SVGProps<SVGSVGElement>) => (
 const getAccessToken = async () => {
   const refresh_token = process.env.NEXT_PUBLIC_SPOTIFY_REFRESH_TOKEN as string;
 
+  const revalidate = 60 * 60 * 24;
+
   const newLocal = "refresh_token";
   const response = await fetch("https://accounts.spotify.com/api/token", {
+    next: { revalidate },
     method: "POST",
     headers: {
       Authorization: `Basic ${Buffer.from(
@@ -85,6 +88,8 @@ export default async function Spotify() {
     topTrack.albumImageUrl,
   )) as string[];
   const contrast = getTextContrast(colorEnd as string);
+
+  console.log(topTrack);
 
   return (
     <div
