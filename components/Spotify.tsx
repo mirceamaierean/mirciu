@@ -89,8 +89,6 @@ export default async function Spotify() {
   )) as string[];
   const contrast = getTextContrast(colorEnd as string);
 
-  console.log(topTrack);
-
   return (
     <div
       style={{
