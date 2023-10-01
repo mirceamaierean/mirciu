@@ -17,8 +17,6 @@ export const Info = () => {
             "Speedcuber",
             "Writer (sort of)",
             "Music Lover",
-            "Meme Connoisseur",
-            "Simple Human Being",
           ],
           autoStart: true,
           delay: 50,
