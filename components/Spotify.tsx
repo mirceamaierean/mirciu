@@ -20,11 +20,8 @@ const SpotifyIcon = (props: SVGProps<SVGSVGElement>) => (
 const getAccessToken = async () => {
   const refresh_token = process.env.NEXT_PUBLIC_SPOTIFY_REFRESH_TOKEN as string;
 
-  const revalidate = 60 * 60 * 24;
-
   const newLocal = "refresh_token";
   const response = await fetch("https://accounts.spotify.com/api/token", {
-    next: { revalidate },
     method: "POST",
     headers: {
       Authorization: `Basic ${Buffer.from(
@@ -50,6 +47,7 @@ const getTopTrack = async (): Promise<Track> => {
       headers: {
         Authorization: `Bearer ${access_token}`,
       },
+      next: { revalidate: 60 * 60 },
     },
   );
 
@@ -94,7 +92,7 @@ export default async function Spotify() {
       style={{
         backgroundImage: `linear-gradient(to bottom, ${colorStart} 30%, ${colorEnd})`,
       }}
-      className={`bg-gradient-to-br py-3 flex flex-row rounded-xl justify-center w-[30rem] mx-auto`}
+      className={`bg-gradient-to-br py-3 flex flex-col rounded-xl justify-center w-64 mx-auto`}
     >
       <Image
         src={topTrack.albumImageUrl}
@@ -103,9 +101,9 @@ export default async function Spotify() {
         width={225}
         height={225}
         priority={true}
-        className="mx-auto pl-4"
+        className="mx-auto"
       />
-      <div className="flex flex-col justify-evenly items-center px-6">
+      <div className="flex flex-col justify-evenly items-center px-6 pt-2">
         <div
           className="flex flex-col justify-center items-center"
           style={{ color: `${contrast}` }}
