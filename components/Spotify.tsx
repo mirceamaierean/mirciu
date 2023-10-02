@@ -92,14 +92,14 @@ export default async function Spotify() {
       style={{
         backgroundImage: `linear-gradient(to bottom, ${colorStart} 30%, ${colorEnd})`,
       }}
-      className={`bg-gradient-to-br py-3 flex flex-col rounded-xl justify-center w-64 mx-auto`}
+      className={`bg-gradient-to-br py-3 flex flex-col rounded-xl justify-center w-72 h-[30rem] mx-auto`}
     >
       <Image
         src={topTrack.albumImageUrl}
         alt={topTrack.name}
         draggable={false}
-        width={225}
-        height={225}
+        width={250}
+        height={250}
         priority={true}
         className="mx-auto"
       />
