@@ -1,9 +1,12 @@
 "use client";
 import { motion } from "framer-motion";
 import React, { useRef } from "react";
+
 import cardImage from "@/public/images/card-image.jpeg";
 import mirciuMic from "@/public/images/mirciumic.jpeg";
 import esentza from "@/public/images/esentza.webp";
+import head from "@/public/images/head.png";
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -21,18 +24,22 @@ export const CardsArea = (props: CardsAreaProps) => {
     return years;
   };
 
+  const isMobile = () => {
+    return window.innerWidth <= 640;
+  }
+
   const constraintsRef = useRef(null);
   return (
-    <div className="relative mx-auto">
+    <div className="relative flex flex-col-reverse justify-center align-center">
       {/* This is the boards on which the cards are dragged */}
       <motion.div
-        className=" dark:bg-white bg-neutral-500 rounded-xl w-full h-[95vh] opacity-5 border-4 border-black dark:border-white"
+        className="hidden sm:block mx-auto dark:bg-white bg-neutral-500 rounded-xl w-72 sm:w-full sm:h-[55rem] opacity-5 border-4 border-black dark:border-white scale-125 sm:scale-100 my-20 sm:my-0"
         ref={constraintsRef}
       />
       {/* Spotify Card */}
       <motion.div
-        className=" w-max absolute top-5 left-5"
-        drag
+        className="w-max mx-auto sm:absolute sm:top-5 sm:right-5 scale-125 sm:scale-100 my-20 sm:my-0"
+        {...(isMobile() ? {} : { drag: true })}
         dragConstraints={constraintsRef}
       >
         {props.children}
@@ -40,9 +47,32 @@ export const CardsArea = (props: CardsAreaProps) => {
       {/* Mirciu card */}
       {/* TO DO: Refactor this card */}
       <motion.div
-        className="bg-[#9c1c1c] rounded-xl absolute h-[30rem] w-72 top-7 left-7"
-        drag
+        className="bg-gradient-to-bl mx-auto from-[#3546DD] to-[#0B125A] rounded-xl sm:absolute h-[30rem] w-72 sm:top-6 sm:right-6 scale-125 sm:scale-100 my-20 sm:my-0"
+        {...(isMobile() ? {} : { drag: true })}
         // animate={{ x: 850, y: 0, opacity: 1 }}
+        // transition={{ duration: 1, delay: 0.5 }}
+        dragConstraints={constraintsRef}
+      >
+        <Image
+          src={head}
+          alt="card-image"
+          className="py-4 px-6"
+          draggable="false"
+          width={300}
+          height={300}
+        />
+        <p className="text-md px-4 text-white">
+          Currently, I work at
+          <Link href="https://dutyventures.com/" className="underline">
+            {" "}
+            <strong>Duty Ventures</strong>
+          </Link>
+          {" "} as a web developer. Ruby on Rails is the main stack we use for app development, but I{"'"}ve also created applications with Next.js, Express, React, and many more. Working remotely gave me the chance to interact with people from all over the world and engage with them, showing me different ways of thinking and working.
+        </p>
+      </motion.div>
+      <motion.div
+        className="bg-[#9c1c1c] rounded-xl sm:absolute h-[30rem] w-72 mx-auto sm:top-7 sm:right-7 scale-125 sm:scale-100 my-20 sm:my-0"
+        {...(isMobile() ? {} : { drag: true })}
         transition={{ duration: 1, delay: 0.5 }}
         dragConstraints={constraintsRef}
       >
@@ -70,9 +100,8 @@ export const CardsArea = (props: CardsAreaProps) => {
         </p>
       </motion.div>
       <motion.div
-        className="bg-gradient-to-bl from-[#E5DFDF] to-[#70959E] rounded-xl absolute h-[30rem] w-72 top-7 left-7"
-        drag
-        // animate={{ x: 850, y: 0, opacity: 1 }}
+        className="bg-gradient-to-bl from-[#E5DFDF] to-[#70959E] rounded-xl sm:absolute h-[30rem] w-72 mx-auto sm:top-8 sm:right-8 scale-125 sm:scale-100 my-20 sm:my-0"
+        {...(isMobile() ? {} : { drag: true })}
         transition={{ duration: 1, delay: 0.5 }}
         dragConstraints={constraintsRef}
       >
@@ -85,7 +114,7 @@ export const CardsArea = (props: CardsAreaProps) => {
           height={300}
         />
         <p className="text-md px-4 text-white">
-          From a small age, I{"'"}ve loved puzzles. I was trying to find
+          From a small age, I loved solving puzzles. I was trying to find
           patterns everywhere. As a kid, my favorite puzzle was the{" "}
           <strong>Rubik{"'"}s Cube</strong>. All the alogrithms I{"'"}ve learned
           shaped the way I think, which was key for the first chapter of my
@@ -93,10 +122,8 @@ export const CardsArea = (props: CardsAreaProps) => {
         </p>
       </motion.div>
       <motion.div
-        className="bg-gradient-to-br from-indigo-500 to-emerald-500 rounded-xl h-[30rem] w-72 absolute top-6 left-6"
-        drag
-        // animate={{ x: 450, y: 0, opacity: 1 }}
-        transition={{ duration: 1, delay: 0.5 }}
+        className="sm:scale-100 bg-gradient-to-br from-indigo-500 to-emerald-500 rounded-xl sm:absolute h-[30rem] w-72 sm:top-9 sm:right-9 mx-auto scale-125 my-20 sm:my-0"
+        {...(isMobile() ? {} : { drag: true })}
         dragConstraints={constraintsRef}
       >
         <Image
@@ -109,8 +136,8 @@ export const CardsArea = (props: CardsAreaProps) => {
           Greetings! My name is <strong>Măierean Mircea</strong>, but my closest
           friends call me <strong>Mirciu</strong>. I am a
           {` ${getNumberOfYearsThatPassed()}-year-old `} student from{" "}
-          <strong>Beclean, Romania</strong>, probably one of the smallest towns
-          on earth, pursuing a{" "}
+          <strong>Beclean, Romania</strong> - probably one of the smallest towns
+          on earth - pursuing a{" "}
           <strong>Bachelor{"'"}s Degree in Computer Science</strong> at{" "}
           <strong>Babeș-Bolyai University from Cluj Napoca</strong>.
         </p>
