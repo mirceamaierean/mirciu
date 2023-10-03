@@ -19,7 +19,7 @@ const SpotifyIcon = (props: SVGProps<SVGSVGElement>) => (
 
 const getAccessToken = async () => {
   const refresh_token = process.env.NEXT_PUBLIC_SPOTIFY_REFRESH_TOKEN as string;
-  
+
   const newLocal = "refresh_token";
   const response = await fetch("https://accounts.spotify.com/api/token", {
     method: "POST",
@@ -39,9 +39,9 @@ const getAccessToken = async () => {
 };
 
 const getTopTrack = async (): Promise<Track> => {
-  
-  let tries = 0, track: any;
-  
+  let tries = 0,
+    track: any;
+
   while (tries <= 5) {
     tries++;
     try {
@@ -54,22 +54,18 @@ const getTopTrack = async (): Promise<Track> => {
           },
           next: { revalidate: 60 * 60 },
         },
-      )
+      );
       const { items } = await response.json();
       if (items.length > 0) {
         track = items[0];
         break;
-      }
-      else
-        tries++;
-    }
-    catch (error) {
+      } else tries++;
+    } catch (error) {
       tries++;
     }
   }
 
-  if (!track)
-    throw new Error("Could not fetch top track");
+  if (!track) throw new Error("Could not fetch top track");
 
   const trackData: Track = {
     name: track.name,
@@ -101,8 +97,7 @@ export default async function Spotify() {
   let topTrack: Track;
   try {
     topTrack = await getTopTrack();
-  }
-  catch (error) {
+  } catch (error) {
     return null;
   }
   if (!topTrack) return null;

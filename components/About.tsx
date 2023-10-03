@@ -3,7 +3,7 @@ import Spotify from "./Spotify";
 
 export const About = () => {
   return (
-    <section id="about" className="max-w-sm sm:max-w-7xl mx-auto pt-28">
+    <section id="about" className="max-w-sm sm:max-w-7xl mx-auto mt-28">
       <div className="flex flex-col items-center pb-12">
         <h1 className="text-4xl font-bold p-2">About Me</h1>
         <h2 className="text-xl font-lg mx-auto text-center">
