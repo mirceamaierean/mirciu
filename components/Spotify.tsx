@@ -19,7 +19,7 @@ const SpotifyIcon = (props: SVGProps<SVGSVGElement>) => (
 
 const getAccessToken = async () => {
   const refresh_token = process.env.NEXT_PUBLIC_SPOTIFY_REFRESH_TOKEN as string;
-
+  
   const newLocal = "refresh_token";
   const response = await fetch("https://accounts.spotify.com/api/token", {
     method: "POST",
@@ -39,13 +39,13 @@ const getAccessToken = async () => {
 };
 
 const getTopTrack = async (): Promise<Track> => {
-  const { access_token } = await getAccessToken();
-
+  
   let tries = 0, track: any;
-
+  
   while (tries <= 5) {
     tries++;
     try {
+      const { access_token } = await getAccessToken();
       const response = await fetch(
         "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=1",
         {
@@ -98,7 +98,13 @@ const getDominantColor = async (imageUrl: string) => {
 };
 
 export default async function Spotify() {
-  const topTrack = await getTopTrack();
+  let topTrack: Track;
+  try {
+    topTrack = await getTopTrack();
+  }
+  catch (error) {
+    return null;
+  }
   if (!topTrack) return null;
   const [colorStart, colorEnd] = (await getDominantColor(
     topTrack.albumImageUrl,
