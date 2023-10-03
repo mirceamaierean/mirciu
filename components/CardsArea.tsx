@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 import cardImage from "@/public/images/card-image.jpeg";
 import mirciuMic from "@/public/images/mirciumic.jpeg";
@@ -15,14 +15,16 @@ interface CardsAreaProps {
 }
 
 export const CardsArea = (props: CardsAreaProps) => {
-  const getNumberOfYearsThatPassed = () => {
+  const [age, setAge] = React.useState(19);
+
+  useEffect(() => {
     const today = new Date();
     const birthday = new Date("10-17-2003");
     const difference = today.getTime() - birthday.getTime();
     const days = Math.floor(difference / (1000 * 3600 * 24));
     const years = Math.floor(days / 365);
-    return years;
-  };
+    setAge(years);
+  }, []);
 
   const isMobile = () => {
     if (typeof window === "undefined") return false;
@@ -147,7 +149,7 @@ export const CardsArea = (props: CardsAreaProps) => {
         <p className="text-md px-4 text-white">
           Greetings! My name is <strong>Măierean Mircea</strong>, but my closest
           friends call me <strong>Mirciu</strong>. I am a
-          {` ${getNumberOfYearsThatPassed()}-year-old `} student from{" "}
+          {` ${age}-year-old `} student from{" "}
           <strong>Beclean, Romania</strong> - probably one of the smallest towns
           on earth - pursuing a{" "}
           <strong>Bachelor{"'"}s Degree in Computer Science</strong> at{" "}
