@@ -25,10 +25,9 @@ export const CardsArea = (props: CardsAreaProps) => {
   };
 
   const isMobile = () => {
-    if (typeof window === "undefined")
-      return false;
+    if (typeof window === "undefined") return false;
     return window.innerWidth <= 640;
-  }
+  };
 
   const constraintsRef = useRef(null);
   return (
@@ -68,8 +67,12 @@ export const CardsArea = (props: CardsAreaProps) => {
           <Link href="https://dutyventures.com/" className="underline">
             {" "}
             <strong>Duty Ventures</strong>
-          </Link>
-          {" "} as a web developer. Ruby on Rails is the main stack we use for app development, but I{"'"}ve also created applications with Next.js, Express, React, and many more. Working remotely gave me the chance to interact with people from all over the world and engage with them, showing me different ways of thinking and working.
+          </Link>{" "}
+          as a web developer. Ruby on Rails is the main stack we use for app
+          development, but I{"'"}ve also created applications with Next.js,
+          Express, React, and many more. Working remotely gave me the chance to
+          interact with people from all over the world and engage with them,
+          showing me different ways of thinking and working.
         </p>
       </motion.div>
       <motion.div
@@ -89,16 +92,23 @@ export const CardsArea = (props: CardsAreaProps) => {
         <p className="text-md px-4 text-white">
           In high school, I was part of <strong>Esentza Robotics</strong>,
           competing in
-          <Link href="https://www.firstinspires.org/robotics/ftc" className="underline">
+          <Link
+            href="https://www.firstinspires.org/robotics/ftc"
+            className="underline"
+          >
             {" "}
             FIRST Tech Challenge
-          </Link>
-          {" "}to promote STEM education. This experience honed my technical skills{" ("}
-          <Link href={process.env.NEXT_PUBLIC_RESUME_URL ?? ""} className="underline">
+          </Link>{" "}
+          to promote STEM education. This experience honed my technical skills
+          {" ("}
+          <Link
+            href={process.env.NEXT_PUBLIC_RESUME_URL ?? ""}
+            className="underline"
+          >
             view my resume
-          </Link>{")"} and fostered invaluable soft skills like
-          communication, leadership, and teamwork through collaboration with my
-          teammates.
+          </Link>
+          {")"} and fostered invaluable soft skills like communication,
+          leadership, and teamwork through collaboration with my teammates.
         </p>
       </motion.div>
       <motion.div

@@ -48,6 +48,7 @@ const getTopTrack = async (): Promise<Track> => {
         Authorization: `Bearer ${access_token}`,
       },
       next: { revalidate: 60 * 60 },
+      cache: "no-store",
     },
   );
 
