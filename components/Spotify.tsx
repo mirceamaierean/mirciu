@@ -41,18 +41,35 @@ const getAccessToken = async () => {
 const getTopTrack = async (): Promise<Track> => {
   const { access_token } = await getAccessToken();
 
-  const response = await fetch(
-    "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=1",
-    {
-      headers: {
-        Authorization: `Bearer ${access_token}`,
-      },
-      next: { revalidate: 60 * 60 },
-    },
-  );
+  let tries = 0, track: any;
 
-  const { items } = await response.json();
-  const track = items[0];
+  while (tries <= 5) {
+    tries++;
+    try {
+      const response = await fetch(
+        "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=1",
+        {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+          next: { revalidate: 60 * 60 },
+        },
+      )
+      const { items } = await response.json();
+      if (items.length > 0) {
+        track = items[0];
+        break;
+      }
+      else
+        tries++;
+    }
+    catch (error) {
+      tries++;
+    }
+  }
+
+  if (!track)
+    throw new Error("Could not fetch top track");
 
   const trackData: Track = {
     name: track.name,
@@ -82,6 +99,7 @@ const getDominantColor = async (imageUrl: string) => {
 
 export default async function Spotify() {
   const topTrack = await getTopTrack();
+  if (!topTrack) return null;
   const [colorStart, colorEnd] = (await getDominantColor(
     topTrack.albumImageUrl,
   )) as string[];
