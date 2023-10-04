@@ -19,7 +19,7 @@ export const CardsArea = (props: CardsAreaProps) => {
 
   useEffect(() => {
     const today = new Date();
-    const birthday = new Date("10-17-2003");
+    const birthday = new Date("2003-10-17");
     const difference = today.getTime() - birthday.getTime();
     const days = Math.floor(difference / (1000 * 3600 * 24));
     const years = Math.floor(days / 365);
