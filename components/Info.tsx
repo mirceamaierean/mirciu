@@ -15,7 +15,6 @@ export const Info = () => {
             "CS Student",
             "Formula 1 Fanatic",
             "Speedcuber",
-            "Writer (sort of)",
             "Music Lover",
           ],
           autoStart: true,

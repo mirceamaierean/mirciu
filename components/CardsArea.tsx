@@ -130,7 +130,7 @@ export const CardsArea = (props: CardsAreaProps) => {
         <p className="text-md px-4 text-white">
           From a small age, I loved solving puzzles. I was trying to find
           patterns everywhere. As a kid, my favorite puzzle was the{" "}
-          <strong>Rubik{"'"}s Cube</strong>. All the alogrithms I{"'"}ve learned
+          <strong>Rubik{"'"}s Cube</strong>. All the algorithms I{"'"}ve learned
           shaped the way I think, which was key for the first chapter of my
           programming career: <strong>✨Competitive Programming✨</strong>
         </p>
