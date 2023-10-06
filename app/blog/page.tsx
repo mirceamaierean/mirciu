@@ -1,7 +1,8 @@
 import Link from "next/link";
 import React from "react";
 import { compareDesc, format, parseISO } from 'date-fns'
-import { allPosts} from 'contentlayer/generated'
+import { allPosts } from 'contentlayer/generated'
+import { PostRow } from "@/components/PostRow";
 
 export default function Blog() {
   const posts = allPosts.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date)))
@@ -12,10 +13,8 @@ export default function Blog() {
       <h1>Blog</h1>
       <ul>
         {posts.map((post) => (
-          <li key={post._raw.sourceFileName}>
-            <Link href={`${post.url}`}>
-                {post.title} ({format(parseISO(post.date), 'MMMM dd, yyyy')})
-            </Link>
+          <li key={post.url}>
+            <PostRow {...post} />
           </li>
         ))}
       </ul>
