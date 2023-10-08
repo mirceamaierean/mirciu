@@ -71,12 +71,12 @@ export const Navbar = () => {
             : "hidden md:flex my-auto"
         }
       >
-        {/* <Link href="/blog">
+        <Link href="/blog">
           <h1 className="block group pr-10 text-neutral-600 dark:text-gray-300 underlined font-medium text-xl xl:hover:text-black dark:xl:hover:text-white">
             Blog
             <span className="block max-w-0 xl:group-hover:max-w-full transition-all duration-300 h-0.5 bg-black dark:bg-white"></span>
           </h1>
-        </Link> */}
+        </Link>
         <Link
           href={process.env.NEXT_PUBLIC_RESUME_URL as string}
           target="_blank"
