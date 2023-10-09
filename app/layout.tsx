@@ -15,10 +15,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="dark:bg-[#1f2028] relative min-h-screen flex flex-col justify-between">
+      <body className="dark:bg-[#1f2028] relative min-h-screen flex flex-col justify-between items-center">
         <div>
           <Navbar />
-          <div className="">{children}</div>
+          {children}
         </div>
         <Footer />
       </body>
