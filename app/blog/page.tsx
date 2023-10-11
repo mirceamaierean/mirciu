@@ -6,7 +6,6 @@ import { PostRow } from "@/components/PostRow";
 
 export default function Blog() {
   const posts = allPosts.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date)))
-  console.log(posts[0]);
 
   return (
     <div className="mt-32 sm:mt-4 mx-5 sm:mx-auto max-w-3xl bg-[#f7f7f7] dark:bg-[#2a2b33] rounded-xl border-2 border-[#f1f1f1] dark:border-[#2a2b33] ">
