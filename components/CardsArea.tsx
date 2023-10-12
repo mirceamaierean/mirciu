@@ -148,10 +148,9 @@ export const CardsArea = (props: CardsAreaProps) => {
         />
         <p className="text-md px-4 text-white">
           Greetings! My name is <strong>Măierean Mircea</strong>, but my closest
-          friends call me <strong>Mirciu</strong>. I am a
-          {` ${age}-year-old `} student from{" "}
-          <strong>Beclean, Romania</strong> - probably one of the smallest towns
-          on earth - pursuing a{" "}
+          friends call me <strong>Mirciu</strong>. I am a{` ${age}-year-old `}{" "}
+          student from <strong>Beclean, Romania</strong> - probably one of the
+          smallest towns on earth - pursuing a{" "}
           <strong>Bachelor{"'"}s Degree in Computer Science</strong> at{" "}
           <strong>Babeș-Bolyai University from Cluj Napoca</strong>.
         </p>
