@@ -14,7 +14,7 @@ export const Circle = (props: CircleProps) => {
 
   return (
     <div
-      className="flex flex-row mt-24"
+      className="flex flex-row"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

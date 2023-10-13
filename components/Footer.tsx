@@ -39,8 +39,8 @@ export const Footer = () => {
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
         <ThemeSwitcher />
       </ThemeProvider>
-      <div className="px-4 my-7 max-w-7xl mx-auto flex flex-col sm:flex-row justify-between">
-        <span className="my-auto">
+      <div className="my-7 max-w-7xl mx-auto flex flex-col sm:flex-row justify-between">
+        <span className="my-auto px-5 sm:px-16">
           Mirciu © {new Date().getFullYear()}. Website built using Next.js and
           Tailwind CSS {"("}
           <Link
@@ -51,7 +51,7 @@ export const Footer = () => {
           </Link>
           {")"}. All rights reserved.
         </span>
-        <div className="flex flex-col py-2">
+        <div className="flex flex-col p-5 sm:px-16">
           <p className="py-2">Let&apos;s connect!</p>
           <div className="flex flex-row gap-4">
             {socials.map((social) => {
