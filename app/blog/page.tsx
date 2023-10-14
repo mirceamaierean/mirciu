@@ -20,7 +20,7 @@ export default function Blog() {
       <hr className="h-px my-4 mx-5 bg-gray-200 border-0 dark:bg-gray-700" />
       <ul>
         {posts.map((post) => (
-          <li key={post.url}>
+          <li key={post._id}>
             <PostRow {...post} />
           </li>
         ))}
