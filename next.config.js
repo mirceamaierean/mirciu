@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const { withContentlayer } = require("next-contentlayer");
-const withExportImages = require("next-export-optimize-images");
 
 const nextConfig = {
   reactStrictMode: true,
@@ -8,8 +7,8 @@ const nextConfig = {
   experimental: { appDir: true },
   images: {
     domains: ["i.scdn.co"], // Add any other allowed domains as well
+    unoptimized: true,
   },
-  output: "export",
 };
 
-module.exports = withContentlayer(withExportImages(nextConfig));
+module.exports = withContentlayer(nextConfig);

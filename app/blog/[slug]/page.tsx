@@ -14,24 +14,13 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   const post = allPosts.find((post) => post._raw.flattenedPath === params.slug);
   if (!post) notFound();
  
-  const { title, date } = post;
+  const { title } = post;
  
   const description = post.summary;
  
   return {
     title,
     description,
-    openGraph: {
-      type: 'article',
-      title,
-      description,
-      publishedTime: date,
-    },
-    twitter: {
-      title,
-      description,
-      card: 'summary_large_image',
-    },
   };
 }
 
