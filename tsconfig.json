@@ -30,6 +30,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".contentlayer/generated"
-  ],
+, "export-images.config.js"  ],
   "exclude": ["node_modules"]
 }
