@@ -23,8 +23,8 @@ const PostLayout = ({ params }: { params: { slug: string } }) => {
 
   return (
     <div className="mt-32 sm:mt-4 mx-5 sm:mx-auto max-w-3xl bg-[#f7f7f7] dark:bg-[#2a2b33] rounded-xl border-2 border-[#f1f1f1] dark:border-[#2a2b33] ">
-      <Link href="/blog" className="flex ml-5">
-        <div className="scale-50">
+      <Link href="/blog" className="mx-auto flex ml-[-2rem]">
+        <div className="scale-[0.6]">
           <Circle
             textContent="Back to all posts"
             rotationAngle={90}
@@ -39,7 +39,9 @@ const PostLayout = ({ params }: { params: { slug: string } }) => {
           </time>
           <h1 className="text-3xl font-bold">{post.title}</h1>
         </div>
-        <MDXComponent />
+        <div className="mx-auto px-4 sm:px-0">
+          <MDXComponent className="mx-auto" />
+        </div>
       </article>
     </div>
   );
