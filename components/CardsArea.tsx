@@ -36,12 +36,12 @@ export const CardsArea = (props: CardsAreaProps) => {
     <div className="relative flex flex-col-reverse justify-center align-center">
       {/* This is the boards on which the cards are dragged */}
       <motion.div
-        className="hidden sm:block mx-auto dark:bg-white bg-neutral-500 rounded-xl w-72 sm:w-full sm:h-[55rem] opacity-5 border-4 border-black dark:border-white scale-125 sm:scale-100 my-20 sm:my-0"
+        className="hidden sm:block mx-auto dark:bg-white bg-neutral-500 rounded-xl w-72 sm:w-full sm:h-[55rem] opacity-5 border-4 border-black dark:border-white scale-[1.15] sm:scale-100 my-16 sm:my-0"
         ref={constraintsRef}
       />
       {/* Spotify Card */}
       <motion.div
-        className="w-max mx-auto sm:absolute sm:top-5 sm:right-5 scale-125 sm:scale-100 my-20 sm:my-0"
+        className="w-max mx-auto sm:absolute sm:top-5 sm:right-5 scale-[1.15] sm:scale-100 mt-20 mb-5 sm:my-0"
         {...(isMobile() ? {} : { drag: true })}
         dragConstraints={constraintsRef}
       >
@@ -50,10 +50,8 @@ export const CardsArea = (props: CardsAreaProps) => {
       {/* Mirciu card */}
       {/* TO DO: Refactor this card */}
       <motion.div
-        className="bg-gradient-to-bl mx-auto from-[#3546DD] to-[#0B125A] rounded-xl sm:absolute h-[30rem] w-72 sm:top-6 sm:right-6 scale-125 sm:scale-100 my-20 sm:my-0"
+        className="bg-gradient-to-bl mx-auto from-[#3546DD] to-[#0B125A] rounded-xl sm:absolute h-[30rem] w-72 sm:top-6 sm:right-6 scale-[1.15] sm:scale-100 mt-20 mb-5 sm:my-0"
         {...(isMobile() ? {} : { drag: true })}
-        // animate={{ x: 850, y: 0, opacity: 1 }}
-        // transition={{ duration: 1, delay: 0.5 }}
         dragConstraints={constraintsRef}
       >
         <Image
@@ -78,7 +76,7 @@ export const CardsArea = (props: CardsAreaProps) => {
         </p>
       </motion.div>
       <motion.div
-        className="bg-[#9c1c1c] rounded-xl sm:absolute h-[30rem] w-72 mx-auto sm:top-7 sm:right-7 scale-125 sm:scale-100 my-20 sm:my-0"
+        className="bg-[#9c1c1c] rounded-xl sm:absolute h-[30rem] w-72 mx-auto sm:top-7 sm:right-7 scale-[1.15] sm:scale-100 mt-20 mb-5 sm:my-0"
         {...(isMobile() ? {} : { drag: true })}
         transition={{ duration: 1, delay: 0.5 }}
         dragConstraints={constraintsRef}
@@ -114,7 +112,7 @@ export const CardsArea = (props: CardsAreaProps) => {
         </p>
       </motion.div>
       <motion.div
-        className="bg-gradient-to-bl from-[#E5DFDF] to-[#70959E] rounded-xl sm:absolute h-[30rem] w-72 mx-auto sm:top-8 sm:right-8 scale-125 sm:scale-100 my-20 sm:my-0"
+        className="bg-gradient-to-bl from-[#E5DFDF] to-[#70959E] rounded-xl sm:absolute h-[30rem] w-72 mx-auto sm:top-8 sm:right-8 scale-[1.15] sm:scale-100 mt-20 mb-5 sm:my-0"
         {...(isMobile() ? {} : { drag: true })}
         transition={{ duration: 1, delay: 0.5 }}
         dragConstraints={constraintsRef}
@@ -136,7 +134,7 @@ export const CardsArea = (props: CardsAreaProps) => {
         </p>
       </motion.div>
       <motion.div
-        className="sm:scale-100 bg-gradient-to-br from-indigo-500 to-emerald-500 rounded-xl sm:absolute h-[30rem] w-72 sm:top-9 sm:right-9 mx-auto scale-125 my-20 sm:my-0"
+        className="sm:scale-100 bg-gradient-to-br from-indigo-500 to-emerald-500 rounded-xl sm:absolute h-[30rem] w-72 sm:top-9 sm:right-9 mx-auto scale-[1.15] my-5 sm:my-0"
         {...(isMobile() ? {} : { drag: true })}
         dragConstraints={constraintsRef}
       >
