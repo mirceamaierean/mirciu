@@ -1,6 +1,6 @@
 import { Info } from "@/components/Info";
 import Image from "next/image";
-import mirciu from "@/public/images/mirciu.png";
+import mirciu from "@/public/images/mirciu.webp";
 import { Circle } from "@/components/Circle";
 import { About } from "@/components/About";
 import Link from "next/link";

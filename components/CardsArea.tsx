@@ -2,10 +2,10 @@
 import { motion } from "framer-motion";
 import React, { useEffect, useRef } from "react";
 
-import cardImage from "@/public/images/card-image.jpeg";
-import mirciuMic from "@/public/images/mirciumic.jpeg";
+import cardImage from "@/public/images/card-image.webp";
+import mirciuMic from "@/public/images/mirciumic.webp";
 import esentza from "@/public/images/esentza.webp";
-import head from "@/public/images/head.png";
+import duty from "@/public/images/duty.webp";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -55,7 +55,7 @@ export const CardsArea = (props: CardsAreaProps) => {
         dragConstraints={constraintsRef}
       >
         <Image
-          src={head}
+          src={duty}
           alt="card-image"
           className="py-4 px-6"
           draggable="false"
