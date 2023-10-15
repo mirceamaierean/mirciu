@@ -1,11 +1,11 @@
 export default function robots() {
   return {
-    host: 'https://mirciu.com',
+    host: "https://mirciu.com",
     rules: [
       {
-        userAgent: '*',
+        userAgent: "*",
       },
     ],
-    sitemap: 'https://mirciu.com/sitemap.xml',
+    sitemap: "https://mirciu.com/sitemap.xml",
   };
 }

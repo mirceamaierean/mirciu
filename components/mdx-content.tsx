@@ -1,17 +1,21 @@
-import { useMDXComponent } from 'next-contentlayer/hooks';
-import Image from 'next/image';
-
+import { useMDXComponent } from "next-contentlayer/hooks";
+import Image from "next/image";
 
 function RoundedImage(props: any) {
   return (
-    <div className='rounded-lg'>
+    <div className="rounded-lg">
       <Image alt={props.alt} className="rounded-lg mx-auto mb-4" {...props} />
     </div>
   );
 }
 
 function Header(props: any) {
-  return <h1 className="text-4xl font-bold my-4 hover:underline transition ease-in-out duration-200" {...props} />;  
+  return (
+    <h1
+      className="text-4xl font-bold my-4 hover:underline transition ease-in-out duration-200"
+      {...props}
+    />
+  );
 }
 
 function Paragraph(props: any) {
@@ -39,7 +43,6 @@ const components = {
   p: Paragraph,
   code: CodeBlock,
 };
-
 
 export function MDXContent({ code }: { code: string }) {
   const Component = useMDXComponent(code);
