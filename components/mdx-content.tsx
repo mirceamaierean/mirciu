@@ -3,7 +3,11 @@ import Image from 'next/image';
 
 
 function RoundedImage(props: any) {
-  return <Image alt={props.alt} className="rounded-lg mx-auto pb-4" {...props} />;
+  return (
+    <div className='rounded-lg'>
+      <Image alt={props.alt} className="rounded-lg mx-auto mb-4" {...props} />
+    </div>
+  );
 }
 
 function Header(props: any) {
