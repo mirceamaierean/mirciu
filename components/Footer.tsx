@@ -19,18 +19,6 @@ const socials = [
     icon: FaLinkedinIn,
     hoverColorClass: "hover:text-[#0077b5]",
   },
-  {
-    name: "Facebook",
-    url: "https://www.facebook.com/mircea.maierean/",
-    icon: FaFacebook,
-    hoverColorClass: "hover:text-[#1877F2]",
-  },
-  {
-    name: "Instagram",
-    url: "https://www.instagram.com/mirceamaierean/",
-    icon: FaInstagram,
-    hoverColorClass: "hover:text-[#C13584]",
-  },
 ];
 
 export const Footer = () => {
