@@ -15,7 +15,7 @@ export const About = () => {
         </h2>
       </div>
       {/* eslint-disable-next-line react/no-children-prop */}
-      <CardsArea />
+      <CardsArea children={<Spotify />}/>
     </section>
   );
 };

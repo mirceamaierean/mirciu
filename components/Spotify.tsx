@@ -52,7 +52,7 @@ const getTopTrack = async (): Promise<Track> => {
           headers: {
             Authorization: `Bearer ${access_token}`,
           },
-          next: { revalidate: 60 * 60 },
+          next: { revalidate: 7 * 24 * 60 * 60 },
         },
       );
       const { items } = await response.json();
