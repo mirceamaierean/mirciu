@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@opentelemetry/api": "^1.9.0",
     "@types/node": "20.4.4",
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
@@ -19,7 +20,7 @@
     "eslint-config-next": "13.4.12",
     "framer-motion": "^10.16.1",
     "hastscript": "^8.0.0",
-    "next": "13.5.6",
+    "next": "14.1.1",
     "next-contentlayer": "^0.3.4",
     "next-themes": "^0.2.1",
     "node-vibrant": "^3.2.1-alpha.1",
